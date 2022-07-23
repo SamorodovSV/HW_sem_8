@@ -263,68 +263,186 @@
 // 12(0,0,0) 22(0,0,1)
 // 45(1,0,0) 53(1,0,1)
 
-internal class Program
-{
-    private static void Main(string[] args)
-    {
-        Console.Clear();
+// internal class Program
+// {
+//     private static void Main(string[] args)
+//     {
+//         Console.Clear();
 
-        int[,,] GetArray(int [] sizes, int min, int max)
-        {
-            int[,,] result = new int[sizes[0], sizes[1], sizes[2]];
-            for (int i = 0; i < result.GetLength(0); i++)
-            {
-                for (int j = 0; j < result.GetLength(1); j++)
-                {
-                    int k = 0;
-                    while (k < result.GetLength(2))
-                    {
-                        int element = new Random().Next(min, max + 1);
-                        if (FindElement(result, element)) continue;
-                        result[i,j,k] = element;
-                        k ++;
-                        
-                    }
-                }
-            }
-            return result;
-        }
+//         int[,,] GetArray(int [] sizes, int min, int max)
+//         {
+//             int[,,] result = new int[sizes[0], sizes[1], sizes[2]];
+//             for (int i = 0; i < result.GetLength(0); i++)
+//             {
+//                 for (int j = 0; j < result.GetLength(1); j++)
+//                 {
+//                     int k = 0;
+//                     while (k < result.GetLength(2))
+//                     {
+//                         int element = new Random().Next(min, max + 1);
+//                         if (FindElement(result, element)) continue;
+//                         result[i,j,k] = element;
+//                         k ++;
 
-        bool FindElement(int[,,] array, int el)
-        {
-            for (int i = 0; i < array.GetLength(0); i++)
-            {
-                for (int j = 0; j < array.GetLength(1); j++)
-                {
-                    for (int k = 0; k < array.GetLength(2); k++)
-                    {
-                        if(array[i,j,k] == el) return true;
-                    }
-                }
-            }
-            return false;
-        }
+//                     }
+//                 }
+//             }
+//             return result;
+//         }
 
-        void PrintArray(int[,,] array)
-        {
-            for (int i = 0; i < array.GetLength(0); i++)
-            {
-                for (int j = 0; j < array.GetLength(1); j++)
-                {
-                    for (int k = 0; k < array.GetLength(2); k++)
-                    {
-                        Console.Write($"{array[i,j,k]} ({i},{j},{k}) ");
-                    }
-                    Console.WriteLine();
-                }
-                Console.WriteLine();
-            }
-        }
+//         bool FindElement(int[,,] array, int el)
+//         {
+//             for (int i = 0; i < array.GetLength(0); i++)
+//             {
+//                 for (int j = 0; j < array.GetLength(1); j++)
+//                 {
+//                     for (int k = 0; k < array.GetLength(2); k++)
+//                     {
+//                         if(array[i,j,k] == el) return true;
+//                     }
+//                 }
+//             }
+//             return false;
+//         }
 
-        Console.Write("Введите размеры массива через пробел: ");
-        string[] nums = Console.ReadLine().Split(" ", StringSplitOptions.RemoveEmptyEntries);
-        int[,,] array = GetArray(new int[] { int.Parse(nums[0]), int.Parse(nums[1]), int.Parse(nums[2]) }, 10, 99);
-        PrintArray(array);
-        
-    }
-}
+//         void PrintArray(int[,,] array)
+//         {
+//             for (int i = 0; i < array.GetLength(0); i++)
+//             {
+//                 for (int j = 0; j < array.GetLength(1); j++)
+//                 {
+//                     for (int k = 0; k < array.GetLength(2); k++)
+//                     {
+//                         Console.Write($"{array[i,j,k]} ({i},{j},{k}) ");
+//                     }
+//                     Console.WriteLine();
+//                 }
+//                 Console.WriteLine();
+//             }
+//         }
+
+//         Console.Write("Введите размеры массива через пробел: ");
+//         string[] nums = Console.ReadLine().Split(" ", StringSplitOptions.RemoveEmptyEntries);
+//         int[,,] array = GetArray(new int[] { int.Parse(nums[0]), int.Parse(nums[1]), int.Parse(nums[2]) }, 10, 99);
+//         PrintArray(array);
+
+//     }
+// }
+
+
+// Задача 62. Заполните спирально массив 4 на 4.
+// Например, на выходе получается вот такой массив:
+
+// 1 2 3 4
+// 12 13 14 5
+// 11 16 15 6
+// 10 9 8 7
+
+
+// internal class Program
+// {
+//     private static void Main(string[] args)
+//     {
+//         int[,] GetArray(int size)
+//         {
+//             int[,] result = new int[size, size];
+//             int i = 0;
+//             int j = 0;
+//             int rowE = size - 1;
+//             int columnE = size -1;
+//             int rowS = 0;
+//             int columnS = 0;
+//             bool left = true;
+//             bool top = true;
+//             int count = 0;
+//             while (count < size * size)
+//             {
+//                 count ++;
+//                 result[i,j] = count;
+//                 if (left && top)
+//                 {
+//                     if (j == columnE)
+//                     {
+//                         rowS++;
+//                         top = true;
+//                         left = false;
+//                         i++;
+//                         continue;
+//                     }
+//                     else
+//                     {
+//                         j++;
+//                         continue;
+//                     }
+//                 }
+//                 if (!left && top)
+//                 {
+//                     if (i == rowE)
+//                     {
+//                         columnE--;
+//                         top = false;
+//                         left = false;
+//                         j--;
+//                         continue;
+//                     }
+//                     else
+//                     {
+//                         i++;
+//                         continue;
+//                     }
+//                 }
+//                 if (!left && !top)
+//                 {
+//                     if (j == columnS)
+//                     {
+//                         rowE--;
+//                         top = false;
+//                         left = true;
+//                         i--;
+//                         continue;
+//                     }
+//                     else
+//                     {
+//                         j--;
+//                         continue;
+//                     }
+//                 }
+//                 if (left && !top)
+//                 {
+//                     if (i == rowS)
+//                     {
+//                         columnS++;
+//                         top = true;
+//                         left = true;
+//                         j++;
+//                         continue;
+//                     }
+//                     else
+//                     {
+//                         i--;
+//                         continue;
+//                     }
+//                 }
+//             }
+//             return result;
+
+//         }
+
+//         void PrintArray(int[,] inArray)
+//         {
+//             for (int i = 0; i < inArray.GetLength(0); i++)
+//             {
+//                 for (int j = 0; j < inArray.GetLength(1); j++)
+//                 {
+//                     Console.Write($"{inArray[i,j]} " + "\t");
+//                 }
+//                 Console.WriteLine();
+//             }
+//         }
+//         Console.Clear();
+//         Console.Write($"Введите размер матрицы: ");
+//         int s = int.Parse(Console.ReadLine());
+//         int[,] array = GetArray(s);
+//         PrintArray(array);
+//     }
+// }
